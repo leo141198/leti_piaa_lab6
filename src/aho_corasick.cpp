@@ -23,7 +23,7 @@ int main() {
     auto alg = new ACAlgorithm(patterns);
     auto result = alg->find(text);
     for(auto elem : *result) {
-        wcout << elem << endl;
+        cout << elem << endl;
     }
     return 0;
 }
