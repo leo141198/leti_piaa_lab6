@@ -8,22 +8,22 @@
 
 class Bohr {
 public:
-    Bohr(char skip_symbol = 0);
+    Bohr(wchar_t skip_symbol = 0);
 
-    void addToBohr(const std::string& pattern);
+    void addToBohr(const std::wstring& pattern);
 
     int getSuffixLink(int node);
 
-    int getMove(int node, char symb);
+    int getMove(int node, wchar_t symb);
 
     void check(int node, int i, std::list<std::pair<int, int>>& result);
 
-    std::shared_ptr<std::list<std::pair<int, int>>> find(const std::string& text);
+    std::shared_ptr<std::list<std::pair<int, int>>> find(const std::wstring& text);
 
 private:
-    char skip;
+    wchar_t skip;
     std::vector<Node*> bohr;
-    std::vector<std::string> patterns;
+    std::vector<std::wstring> patterns;
 };
 
 

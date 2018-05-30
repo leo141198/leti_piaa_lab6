@@ -2,13 +2,13 @@
 
 using namespace std;
 
-Bohr::Bohr(char skip_symbol) : skip(skip_symbol) {
+Bohr::Bohr(wchar_t skip_symbol) : skip(skip_symbol) {
     bohr.push_back(new Node(0, '$'));
 }
 
-void Bohr::addToBohr(const string& pattern) {
+void Bohr::addToBohr(const wstring& pattern) {
     int num = 0;
-    for(char symb : pattern) {
+    for(wchar_t symb : pattern) {
         if(bohr[num]->next_nodes.find(symb) == bohr[num]->next_nodes.end()) {
             bohr.push_back(new Node(num, symb));
             bohr[num]->next_nodes[symb] = bohr.size() - 1;
@@ -32,7 +32,7 @@ int Bohr::getSuffixLink(int node) {
     return bohr[node]->sfx_link;
 }
 
-int Bohr::getMove(int node, char symb) {
+int Bohr::getMove(int node, wchar_t symb) {
     if(bohr[node]->move.find(symb) == bohr[node]->move.end()) {
         if(bohr[node]->next_nodes.find(symb) != bohr[node]->next_nodes.end()) {
             bohr[node]->move[symb] = bohr[node]->next_nodes[symb];
@@ -50,17 +50,17 @@ int Bohr::getMove(int node, char symb) {
 void Bohr::check(int node, int i, list<pair<int, int>>& result) {
     for(int u = node; u != 0; u = getSuffixLink(u)) {
         if(bohr[u]->flag) {
-            auto a = i + 2 - patterns[bohr[u]->pattern_index].length();
+            auto a = i + 2 - patterns[bohr[u]->pattern_index].size();
             auto b = bohr[u]->pattern_index + 1;
-            result.emplace_front(i + 2 - patterns[bohr[u]->pattern_index].length(), bohr[u]->pattern_index + 1);
+            result.emplace_front(i + 2 - patterns[bohr[u]->pattern_index].size(), bohr[u]->pattern_index + 1);
         }
     }
 }
 
-shared_ptr<list<pair<int, int>>> Bohr::find(const string& text) {
+shared_ptr<list<pair<int, int>>> Bohr::find(const wstring& text) {
     shared_ptr<list<pair<int, int>>> result(new list<pair<int, int>>);
     int u = 0;
-    for(int i = 0; i < text.length(); i++) {
+    for(int i = 0; i < text.size(); i++) {
         u = getMove(u, text[i]);
         check(u, i, *result);
     }

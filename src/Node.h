@@ -4,15 +4,15 @@
 #include <map>
 
 struct Node {
-    Node(int parent, char symb) : parent(parent), symb(symb), flag(false), sfx_link(-1), sfx_good_link(-1) {}
-    std::map<char, int> next_nodes;
-    std::map<char, int> move;
+    Node(int parent, wchar_t symb) : parent(parent), symb(symb), flag(false), sfx_link(-1), sfx_good_link(-1) {}
+    std::map<wchar_t, int> next_nodes;
+    std::map<wchar_t, int> move;
     bool flag;
     int pattern_index;
     int sfx_link;
     int sfx_good_link;
     int parent;
-    char symb;
+    wchar_t symb;
 };
 
 

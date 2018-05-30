@@ -4,15 +4,16 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <cwchar>
 #include "Bohr.h"
 
 using namespace std;
 
 class ACAlgorithm {
 public:
-    ACAlgorithm(const vector<string>& patterns, char skip_symbol = 0);
+    ACAlgorithm(const vector<wstring>& patterns, wchar_t skip_symbol = 0);
 
-    shared_ptr<vector<string>> find(string& text);
+    shared_ptr<vector<string>> find(wstring& text);
 
 private:
     Bohr* bohr;
